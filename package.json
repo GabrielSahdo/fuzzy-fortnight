@@ -3,7 +3,11 @@
   "version": "1.0.44",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "docker:build": "docker build -t bun-api .",
+    "docker:run": "docker run -p 3000:3000 bun-api",
+    "docker:watch": "docker run --name bun-api -p 3000:3000 -v `pwd`:/src bun-api bun run dev"
   },
   "dependencies": {
     "elysia": "latest"

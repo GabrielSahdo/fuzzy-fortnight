@@ -2,18 +2,31 @@
   "name": "bun-api",
   "version": "1.0.44",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix",
+    "pretty": "prettier --write \"src/**/*.ts\"",
     "dev": "bun run --watch src/index.ts",
     "start": "bun run src/index.ts",
     "docker:build": "docker build -t bun-api .",
     "docker:run": "docker run -p 3000:3000 bun-api",
     "docker:watch": "docker run --name bun-api -p 3000:3000 -v `pwd`:/src bun-api bun run dev"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bun run lint"
+    }
+  },
   "dependencies": {
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "bun-types": "latest",
+    "eslint": "^8.45.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   },
   "module": "src/index.js"
 }

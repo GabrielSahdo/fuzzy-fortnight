@@ -1,7 +1,9 @@
-import { Elysia } from 'elysia';
+import { Elysia } from "elysia";
 
-const a ="a";
+const app = new Elysia()
+  .get("/ping", () => "pong")
+  .listen(3000);
 
-const app = new Elysia().get('/ping', () => 'pong').listen(3000);
-
-console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
+console.log(
+  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+);

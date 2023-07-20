@@ -2,8 +2,6 @@ import { Elysia } from "elysia";
 
 const app = new Elysia()
   .get("/ping", () => "pong")
-  .listen(3000);
+  .listen(process.env.PORT ?? 3000);
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+console.log(`🦊 Elysia is running at port ${app.server?.port}`);

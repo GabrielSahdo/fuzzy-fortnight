@@ -5,7 +5,7 @@
     "dev": "bun run --watch src/index.ts",
     "start": "bun run src/index.ts",
     "docker": "docker compose up -d",
-    "docker:dev": "docker compose -f docker-compose.yaml -f docker-compose.dev.yml up -d"
+    "docker:dev": "docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d"
   },
   "dependencies": {
     "@elysiajs/swagger": "^0.5.2",

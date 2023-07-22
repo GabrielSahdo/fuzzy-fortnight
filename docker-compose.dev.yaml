@@ -1,0 +1,7 @@
+services:
+  app:
+    command: bun run dev
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/src/

@@ -6,7 +6,9 @@ const user = t.Object({
     email: t.String(),
 });
 
-const userArray = t.Array(user);
+const userArray = t.Object({
+    users: t.Array(user),
+})
 
 const userRequest = t.Object({
     name: t.String(),

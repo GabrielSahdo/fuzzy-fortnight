@@ -17,7 +17,7 @@ export const getById = (id: Number) => {
 }
 
 export const getAll = () => {
-    return users;
+    return { users };
 }
 
 export const create = (user: any) => {

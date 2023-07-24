@@ -13,8 +13,6 @@ export const userRouter = (app: Elysia) => app
             response: t.Array(user)
         })
 
-
-
         .post("/", ({ body }) => create(body), {
             body: userRequest,
             response: user,

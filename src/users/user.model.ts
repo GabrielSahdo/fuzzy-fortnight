@@ -1,12 +1,19 @@
-import { t } from "elysia";
+import Elysia, { t } from "elysia";
 
-export const user = t.Object({
+const user = t.Object({
     id: t.Number(),
     name: t.String(),
     email: t.String(),
 });
 
-export const userRequest = t.Object({
+const userArray = t.Array(user);
+
+const userRequest = t.Object({
     name: t.String(),
     email: t.String(),
 });
+
+export const userModels = (app: Elysia) => app
+    .model("user", user)
+    .model("userArray", userArray)
+    .model("userRequest", userRequest)

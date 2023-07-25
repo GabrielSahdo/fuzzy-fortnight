@@ -8,13 +8,15 @@ const user = t.Object({
 
 const userArray = t.Object({
     users: t.Array(user),
-})
+});
 
 const userRequest = t.Object({
     name: t.String(),
     email: t.String(),
 });
 
+export type User = typeof user.static;
+export type UserRequest = typeof userRequest.static;
 export const userModels = (app: Elysia) => app
     .model("user", user)
     .model("userArray", userArray)

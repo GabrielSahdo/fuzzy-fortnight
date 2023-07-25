@@ -2,9 +2,9 @@ version: '3'
 services:
   api:
     build: .
+    env_file: .env
     command: bun run start
     ports:
-      - 3000:3000
+      - ${PORT}:${PORT}
     environment:
       NODE_ENV: production
-      PORT: 3000

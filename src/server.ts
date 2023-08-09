@@ -1,7 +1,8 @@
 import swagger from "@elysiajs/swagger";
+import { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import Elysia from "elysia";
-import { userRouter } from "./users/user.router";
 import { errorHandler } from "./middlewares/error.middleware";
+import { userRouter } from "./users/user.router";
 
 export class Server {
     app?: Elysia<any>;
@@ -11,9 +12,10 @@ export class Server {
         this.port = port;
     }
 
-    start() {
+    start(database: BunSQLiteDatabase) {
         this.app = new Elysia()
             .use(errorHandler)
+            .state('db', database)
             .use(swagger())
             .use(userRouter)
             .listen(this.port);

@@ -3,6 +3,7 @@ import Elysia, { t } from "elysia";
 const user = t.Object({
     id: t.Number(),
     name: t.String(),
+    surname: t.String(),
     email: t.String(),
 });
 
@@ -12,6 +13,7 @@ const userArray = t.Object({
 
 const userRequest = t.Object({
     name: t.String(),
+    surname: t.String(),
     email: t.String(),
 });
 

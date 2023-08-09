@@ -1,44 +1,50 @@
-import { User, UserRequest } from "./user.model";
+import { eq } from "drizzle-orm";
+import { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
+import { users } from "../database/schema/users.schema";
+import { UserRequest } from "./user.model";
 
-const users: User[] = [];
+export const getById = (id: Number, db: BunSQLiteDatabase) => {
+    const user = db
+        .select()
+        .from(users)
+        .where(eq(users.id, id as any))
+        .get();
 
-export const getById = (id: Number) => {
-    const user = users.find(u => u.id === id);
-
-    if (!user) {
-        throw Error("User Not Found");
-    }
+    if (!user) throw new Error("User not found");
 
     return user;
 }
 
-export const getAll = () => {
-    return { users };
+export const getAll = (db: BunSQLiteDatabase) => {
+    const dbUsers = db
+        .select()
+        .from(users)
+        .all()
+
+    return { users: dbUsers };
 }
 
-export const create = (userRequest: UserRequest) => {
-    const newUser = {
-        id: users.length + 1,
-        name: userRequest.name,
-        email: userRequest.email,
-    };
+export const create = (userRequest: UserRequest, db: BunSQLiteDatabase) => {
+    const userCreated = db.insert(users).values(userRequest).returning().get();
 
-    users.push(newUser);
-
-    return newUser;
+    return userCreated;
 }
 
-export const update = (id: Number, user: UserRequest) => {
-    const index = users.findIndex(u => u.id === id);
+export const update = (id: Number, userRequest: UserRequest, db: BunSQLiteDatabase) => {
+    const user = db
+        .select()
+        .from(users)
+        .where(eq(users.id, id as any))
+        .get();
 
-    if (index < 0) {
-        throw Error("User Not Found");
-    }
+    if (!user) throw new Error("User not found");
 
-    users[index] = {
-        ...users[index],
-        ...user,
-    };
+    const userUpdated = db
+        .update(users)
+        .set(userRequest)
+        .where(eq(users.id, id as any))
+        .returning()
+        .get();
 
-    return users[index];
+    return userUpdated;
 }

@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
 import { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
-import { users } from "../database/schema/users.schema";
-import { UserRequest } from "./user.model";
+import { insertUserSchema, users } from "../database/schema/users.schema";
 
 export const getById = (id: Number, db: BunSQLiteDatabase) => {
     const user = db
@@ -24,13 +23,13 @@ export const getAll = (db: BunSQLiteDatabase) => {
     return { users: dbUsers };
 }
 
-export const create = (userRequest: UserRequest, db: BunSQLiteDatabase) => {
+export const create = (userRequest: insertUserSchema, db: BunSQLiteDatabase) => {
     const userCreated = db.insert(users).values(userRequest).returning().get();
 
     return userCreated;
 }
 
-export const update = (id: Number, userRequest: UserRequest, db: BunSQLiteDatabase) => {
+export const update = (id: Number, userRequest: insertUserSchema, db: BunSQLiteDatabase) => {
     const user = db
         .select()
         .from(users)

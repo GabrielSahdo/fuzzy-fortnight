@@ -5,11 +5,13 @@
     "dev": "bun run --watch src/index.ts",
     "start": "bun run src/index.ts",
     "docker": "docker compose up -d",
-    "docker:dev": "docker compose -f docker-compose.dev.yaml up"
+    "docker:dev": "docker compose -f docker-compose.dev.yaml up",
+    "generate:migration": "bun x drizzle-kit generate:sqlite"
   },
   "dependencies": {
     "@elysiajs/swagger": "^0.5.2",
-    "drizzle-orm": "^0.27.2",
+    "drizzle-orm": "^0.28.2",
+    "drizzle-typebox": "^0.1.0",
     "elysia": "^0.5.25"
   },
   "devDependencies": {

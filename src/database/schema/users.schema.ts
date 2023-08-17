@@ -10,5 +10,6 @@ export const users = sqliteTable("user", {
 
 export const insertUserSchema = createInsertSchema(users);
 export type insertUserSchema = typeof insertUserSchema.static;
+
 export const selectUserSchema = createSelectSchema(users);
 export type selectUserSchema = typeof selectUserSchema.static;
